@@ -2,12 +2,26 @@ package org.example.stud.n.laptop;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Laptop {
     @Id
     private int lid;
     private String lname;
+    @ManyToOne
+    private Student student;
+
+    /**
+     * Laptop will know about student due to annotation @ManyToOne
+     */
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     public int getLid() {
         return lid;

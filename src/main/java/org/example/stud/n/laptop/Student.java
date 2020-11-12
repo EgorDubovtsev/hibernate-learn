@@ -2,7 +2,9 @@ package org.example.stud.n.laptop;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -10,11 +12,13 @@ public class Student {
     private int rollno;
     private String name;
     private int marks;
-    @OneToOne
-    private Laptop laptop;
+    @OneToMany
+    private List<Laptop> laptops = new ArrayList<Laptop>();
 
     /**
-     * In this case, we append to table 'student' his laptop id. In table 'laptop' nothing will change
+     * will be created table student_laptop
+     * where will storing student PK and laptop PK
+     * !OneToMany
      */
     public int getRollno() {
         return rollno;
@@ -40,11 +44,11 @@ public class Student {
         this.marks = marks;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
+    public List<Laptop> getLaptops() {
+        return laptops;
     }
 
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 }

@@ -34,7 +34,7 @@ public class App {
         student.setMarks(4);
         student.setRollno(3);
         student.setName("Polly");
-        student.setLaptop(laptop);
+        student.getLaptops().add(laptop);
         Configuration cfg = new Configuration().configure()
                 .addAnnotatedClass(Alien.class)
                 .addAnnotatedClass(Student.class)
