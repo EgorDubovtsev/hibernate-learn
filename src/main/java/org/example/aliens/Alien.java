@@ -1,4 +1,6 @@
-package org.example;
+package org.example.aliens;
+
+import org.example.Home;
 
 import javax.persistence.*;
 
