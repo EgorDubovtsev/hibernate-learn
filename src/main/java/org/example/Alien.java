@@ -1,9 +1,6 @@
 package org.example;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "aliens")
@@ -14,6 +11,21 @@ public class Alien {
     private String aname;
     @Column(name = "alien_color")
     private String color;
+    @Embedded
+    private Home home;
+
+    /**
+     * annotation @Embedded will separate object on columns
+     * and insert into "aliens" row
+     *
+     */
+    public Home getHome() {
+        return home;
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
+    }
 
     public int getAid() {
         return aid;

@@ -10,11 +10,17 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 public class App {
     public static void main(String[] args) {
+        Alien alienFetched;
         Alien alienNew = new Alien();
-        alienNew.setAid(5);
+        Home home = new Home();
+
+        home.setHomeId("21");
+        home.setStreet("Main street");
+        alienNew.setAid(6);
         alienNew.setAname("Bob");
         alienNew.setColor("pink");
-        Alien alienFetched = new Alien();
+       alienNew.setHome(home);
+
 
         Configuration cfg = new Configuration().configure().addAnnotatedClass(Alien.class);
         ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();
