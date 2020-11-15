@@ -2,6 +2,7 @@ package org.example.stud.n.laptop;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +13,13 @@ public class Student {
     private int rollno;
     private String name;
     private int marks;
-    @OneToMany(mappedBy = "student")//field in Laptop
+    @ManyToMany(mappedBy = "students")//field in Laptop
     private List<Laptop> laptops = new ArrayList<Laptop>();
 
     /**
-     * will NOT be created table student_laptop
+     * will  be created table laptop_student
      * where will storing student PK and laptop PK
-     * !OneToMany
+     * !ManyToMany
      */
     public int getRollno() {
         return rollno;

@@ -12,7 +12,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 
 public class App {
-    public static void main(String[] args) {//1:24
+    public static void main(String[] args) {
         Alien alienFetched;
         Alien alienNew = new Alien();
 
@@ -29,12 +29,15 @@ public class App {
         Laptop laptop = new Laptop();
         laptop.setLid(2);
         laptop.setLname("MAC");
-
         Student student = new Student();
         student.setMarks(4);
         student.setRollno(3);
         student.setName("Polly");
         student.getLaptops().add(laptop);
+
+        laptop.getStudents().add(student);
+
+
         Configuration cfg = new Configuration().configure()
                 .addAnnotatedClass(Alien.class)
                 .addAnnotatedClass(Student.class)
