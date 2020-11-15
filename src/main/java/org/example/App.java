@@ -12,7 +12,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) {//1:24
         Alien alienFetched;
         Alien alienNew = new Alien();
 

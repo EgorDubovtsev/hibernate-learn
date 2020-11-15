@@ -12,11 +12,11 @@ public class Student {
     private int rollno;
     private String name;
     private int marks;
-    @OneToMany
+    @OneToMany(mappedBy = "student")//field in Laptop
     private List<Laptop> laptops = new ArrayList<Laptop>();
 
     /**
-     * will be created table student_laptop
+     * will NOT be created table student_laptop
      * where will storing student PK and laptop PK
      * !OneToMany
      */
