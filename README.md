@@ -1,1 +1,1 @@
-# hibernate-lern
+# hibernate-learn
