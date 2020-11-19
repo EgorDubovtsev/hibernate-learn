@@ -1,8 +1,8 @@
 package org.example;
 
 import org.example.aliens.Alien;
-import org.example.stud.n.laptop.Laptop;
 import org.example.stud.n.laptop.Student;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,52 +10,39 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.util.List;
+import java.util.Random;
+
 
 public class App {
     public static void main(String[] args) {
-        Alien alienFetched;
-        Alien alienNew = new Alien();
-
-        alienNew.setAid(6);
-        alienNew.setAname("Bob");
-        alienNew.setColor("pink");
-        Home home = new Home();
-
-        home.setHomeId("21");
-        home.setStreet("Main street");
-        alienNew.setHome(home);
-
-
-        Laptop laptop = new Laptop();
-        laptop.setLid(2);
-        laptop.setLname("MAC");
-        Student student = new Student();
-        student.setMarks(4);
-        student.setRollno(3);
-        student.setName("Polly");
-        student.getLaptops().add(laptop);
-
-        laptop.getStudents().add(student);
-
 
         Configuration cfg = new Configuration().configure()
                 .addAnnotatedClass(Alien.class)
-                .addAnnotatedClass(Student.class)
-                .addAnnotatedClass(Laptop.class);
+                .addAnnotatedClass(Student.class);
         ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();
-
         SessionFactory sf = cfg.buildSessionFactory(reg);
         Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
+        session.beginTransaction();
 
+        Random r = new Random();
+//fill the table
+//        for (int i=1;i<=50;i++){
+//            Student student = new Student();
+//            student.setRollno(i);
+//            student.setName("Name "+i);
+//            student.setMarks(r.nextInt(100));
+//            session.save(student);
+//        }
 
-//        session.save(alienNew);
-        session.save(student);
-        session.save(laptop);
+        Query q = session.createQuery("from Student");
+        List<Student> students = q.list();
+        for(Student s:students){
+            System.out.println(s.getName());
+        }
 
-        alienFetched = (Alien) session.get(Alien.class,3);
-        tx.commit();
-        System.out.println(alienFetched);
+        session.getTransaction().commit();
+
 
     }
 }
