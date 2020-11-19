@@ -34,11 +34,18 @@ public class App {
 //            student.setMarks(r.nextInt(100));
 //            session.save(student);
 //        }
-
-        Query q = session.createQuery("from Student");
+/**
+ * Student below it is Entity name,
+ * for the filtering use field names
+ *
+ * */
+        Query q = session.createQuery("from Student where marks>50");
+        Query qSelectOnlyOne = session.createQuery("from Student where rollno=7");
         List<Student> students = q.list();
+        Student student = (Student) qSelectOnlyOne.uniqueResult();
+        System.out.println("ONLY ONE "+ student);
         for(Student s:students){
-            System.out.println(s.getName());
+            System.out.println(s);
         }
 
         session.getTransaction().commit();
