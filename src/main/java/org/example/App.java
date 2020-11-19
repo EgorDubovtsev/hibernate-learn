@@ -34,18 +34,17 @@ public class App {
 //            student.setMarks(r.nextInt(100));
 //            session.save(student);
 //        }
-/**
- * Student below it is Entity name,
- * for the filtering use field names
- *
- * */
-        Query q = session.createQuery("from Student where marks>50");
-        Query qSelectOnlyOne = session.createQuery("from Student where rollno=7");
-        List<Student> students = q.list();
-        Student student = (Student) qSelectOnlyOne.uniqueResult();
-        System.out.println("ONLY ONE "+ student);
-        for(Student s:students){
-            System.out.println(s);
+        /**
+         *  use aliases in join queries
+         * */
+        Query q = session.createQuery("select rollno,name from Student where marks>50");
+        Query qSelectOnlyOne = session.createQuery("select rollno,name from Student where rollno=7");
+        List<Object[]> students = (List<Object[]>) q.list(); //This will return list of object arrays
+        Object[] student = (Object[]) qSelectOnlyOne.uniqueResult();// if result is unique will be returned one array of object
+        System.out.println("ONLY ONE "+ student[0]+" "+student[1]);
+
+        for(Object[] s:students){
+            System.out.println(s[0]+" "+s[1]);
         }
 
         session.getTransaction().commit();
